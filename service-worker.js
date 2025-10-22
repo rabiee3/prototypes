@@ -1,28 +1,52 @@
-const CACHE_NAME = 'enlit-prototypes';
+const CACHE_NAME = 'justinmind-global-cache-v1';
 
-// Automatically cache everything in your site root
+// File types to cache
+const EXTENSIONS = /\.(html|js|css|png|jpg|jpeg|gif|svg|json|woff2?|ttf|ico)$/i;
+
+// Recursively fetch directory listings (Netlify & Vercel support static files)
+async function listAllFiles(baseUrl) {
+  const response = await fetch(baseUrl);
+  const text = await response.text();
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(text, 'text/html');
+  const links = [...doc.querySelectorAll('a')];
+
+  const urls = [];
+  for (const link of links) {
+    const href = link.getAttribute('href');
+    if (!href || href.startsWith('?') || href.startsWith('#')) continue;
+
+    const full = new URL(href, baseUrl).href;
+    if (full.endsWith('/')) {
+      // recursively scan subfolders
+      urls.push(...await listAllFiles(full));
+    } else if (EXTENSIONS.test(full)) {
+      urls.push(full);
+    }
+  }
+  return urls;
+}
+
 self.addEventListener('install', event => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then(async cache => {
-      // Fetch the root to find all relative asset links
-      const indexResponse = await fetch('./index.html');
-      const indexText = await indexResponse.text();
+  event.waitUntil((async () => {
+    const cache = await caches.open(CACHE_NAME);
+    const allFiles = [
+      location.origin + '/',
+      location.origin + '/index.html',
+    ];
 
-      // Parse and extract file paths (basic scan for .js, .css, .png, .jpg, etc.)
-      const urlsToCache = ['./', './index.html'];
-      const regex = /"(.*?)\.(js|css|png|jpg|jpeg|gif|svg|json|html)"/g;
-      let match;
-      while ((match = regex.exec(indexText))) {
-        const file = match[1] + '.' + match[2];
-        if (!urlsToCache.includes(file)) urlsToCache.push(file);
-      }
+    // recursively scan prototypes folder
+    try {
+      const prototypeFiles = await listAllFiles(location.origin + '/prototypes/');
+      allFiles.push(...prototypeFiles);
+    } catch (e) {
+      console.warn('Failed to scan prototypes folder:', e);
+    }
 
-      // Cache all discovered URLs
-      await cache.addAll(urlsToCache);
-      console.log('Cached files:', urlsToCache);
-      self.skipWaiting();
-    })
-  );
+    await cache.addAll(allFiles);
+    console.log('Cached files:', allFiles);
+    self.skipWaiting();
+  })());
 });
 
 self.addEventListener('activate', event => {
@@ -39,12 +63,11 @@ self.addEventListener('fetch', event => {
     caches.match(event.request).then(response =>
       response ||
       fetch(event.request).then(fetchRes => {
-        // Cache new requests for next time
         return caches.open(CACHE_NAME).then(cache => {
           cache.put(event.request, fetchRes.clone());
           return fetchRes;
         });
-      }).catch(() => caches.match('./index.html'))
+      }).catch(() => caches.match(location.origin + '/index.html'))
     )
   );
 });
