@@ -1,4 +1,4 @@
-const CACHE_NAME = 'sledkom';
+const CACHE_NAME = 'enlit-prototypes';
 const OFFLINE_URLS = [
   './',
   './index.html',
