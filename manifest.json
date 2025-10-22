@@ -1,7 +1,7 @@
 {
   "name": "Enlit Prototypes",
   "short_name": "Prototypes",
-  "start_url": "/index.html",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#000000",
