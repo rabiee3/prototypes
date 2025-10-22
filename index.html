@@ -27,5 +27,26 @@
     Prototypes
 
     <a href="/sledKom-prototype/" title="SledKom">SledKom</a>
+
+    <button id="installBtn" style="display:none;">Install App</button>
+
+    <script>
+      let deferredPrompt;
+      const installBtn = document.getElementById("installBtn");
+
+      window.addEventListener("beforeinstallprompt", (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        installBtn.style.display = "block";
+
+        installBtn.addEventListener("click", async () => {
+          installBtn.style.display = "none";
+          deferredPrompt.prompt();
+          const choice = await deferredPrompt.userChoice;
+          console.log("User choice:", choice.outcome);
+          deferredPrompt = null;
+        });
+      });
+    </script>
   </body>
 </html>
