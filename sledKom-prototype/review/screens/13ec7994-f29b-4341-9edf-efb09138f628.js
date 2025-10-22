@@ -2,7 +2,7 @@ var content='<div class="ui-page " deviceName="web" deviceType="desktop" deviceW
     <div id="t-f39803f7-df02-4169-93eb-7547fb8c961a" class="template growth-both devWeb canvas firer commentable non-processed" alignment="left" name="Template 1"width="1366" height="768">\
     <div id="backgroundBox"><div class="colorLayer"></div><div class="imageLayer"></div></div>\
     <div id="alignmentBox">\
-      <link type="text/css" rel="stylesheet" href="./review/templates/f39803f7-df02-4169-93eb-7547fb8c961a/style-1761096687802.css" />\
+      <link type="text/css" rel="stylesheet" href="./review/templates/f39803f7-df02-4169-93eb-7547fb8c961a/style-1761097280098.css" />\
       <div class="freeLayout">\
       </div>\
 \
@@ -12,9 +12,9 @@ var content='<div class="ui-page " deviceName="web" deviceType="desktop" deviceW
     <div id="s-13ec7994-f29b-4341-9edf-efb09138f628" class="screen growth-vertical devWeb canvas PORTRAIT firer ie-background commentable non-processed" alignment="left" name="Add New Schedule"width="1366" height="768">\
     <div id="backgroundBox"><div class="colorLayer"></div><div class="imageLayer"></div></div>\
     <div id="alignmentBox">\
-      <link type="text/css" rel="stylesheet" href="./review/screens/13ec7994-f29b-4341-9edf-efb09138f628/style-1761096687802.css" />\
+      <link type="text/css" rel="stylesheet" href="./review/screens/13ec7994-f29b-4341-9edf-efb09138f628/style-1761097280098.css" />\
       <div class="freeLayout">\
-      <div id="s-Image_1" class="image firer ie-background commentable non-processed" customid="Image 1"   datasizewidth="1366.00px" datasizeheight="768.00px" dataX="0.00" dataY="0.00"   alt="image">\
+      <div id="s-Image_1" class="percentage image lockV firer ie-background commentable non-processed-percentage non-processed" customid="Image 1"   datasizewidth="100.00%" datasizeheight="768.00px" dataX="0.00" dataY="0.00" aspectRatio="0.56222546"   alt="image">\
         <div class="borderLayer">\
         	<div class="imageViewport">\
         		<img src="./images/b723d36e-cbe1-4226-8079-c2a83f0dfa5d.png" />\

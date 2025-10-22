@@ -6,7 +6,7 @@
 }
 #s-e45f1708-671a-4198-8f9d-5f12af802406 #s-Image_1 {
   position: absolute;
-  width: 1366.0px;
+  width: calc(100.0% - 0.0px - 0.0px);
   height: 768.0px;
   -webkit-transform: rotate(0.0deg);
   -moz-transform: rotate(0.0deg);
