@@ -37,7 +37,7 @@ self.addEventListener('install', event => {
 
     // recursively scan prototypes folder
     try {
-      const prototypeFiles = await listAllFiles(location.origin + '/prototypes/');
+      const prototypeFiles = await listAllFiles(location.origin + '/');
       allFiles.push(...prototypeFiles);
     } catch (e) {
       console.warn('Failed to scan prototypes folder:', e);
